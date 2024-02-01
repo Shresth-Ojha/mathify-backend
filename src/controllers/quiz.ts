@@ -8,11 +8,12 @@ import { ResultResponse } from '../utils/interfaces';
 const createQuiz: RequestHandler = async (req, res, next) => {
     try {
         const created_by = req.userId;
+        const author = req.username
         const name = req.body.name;
         const questions = req.body.questions;
         const answers = req.body.answers;
 
-        const quiz = new Quiz({ name, questions, answers, created_by });
+        const quiz = new Quiz({ name, questions, answers, created_by, author });
         const result = await quiz.save();
 
         const resp: ResultResponse = {
@@ -34,7 +35,6 @@ const getQuiz: RequestHandler = async (req, res, next) => {
         if(quizId){ // single quiz
             quiz = await Quiz.findById(quizId, {
                 created_by: 0,
-                is_published: 0,
             });
             if (!quiz) {
                 const err = new ProjectError(`Quiz with this Id does'nt exist`);
@@ -42,7 +42,7 @@ const getQuiz: RequestHandler = async (req, res, next) => {
                 throw err;
             }
         } else { // all quizzes
-            quiz = await Quiz.find({}, {created_by: 0, is_published: 0})
+            quiz = await Quiz.find({}, {created_by: 0})
             if(!quiz){
                 const err = new ProjectError('No quiz found')
                 err.statusCode = 404;

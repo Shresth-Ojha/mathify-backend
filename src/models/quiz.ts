@@ -33,6 +33,10 @@ const quizSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: true
         },
+        author: {
+            type: String,
+            required: true
+        },
         is_published: {
             type:Boolean,
             default: false

@@ -58,7 +58,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
             const match = await bcrypt.compare(passFromReq, passFromDB);
             if (match) {
                 const token = jwt.sign(
-                    { userId: user._id },
+                    { userId: user._id, name: user.name },
                     'reallysecretkey',
                     { expiresIn: '1h' }
                 );

@@ -14,7 +14,7 @@ const isAuthenticated: RequestHandler = (req, res, next) => {
         }
         const token = authHeader.split(' ')[1];
 
-        const decodedToken: { userId: String; iat: Number; exp: Number } = <
+        const decodedToken: { userId: String; name:String, iat: Number; exp: Number } = <
             any
         >jwt.verify(token, 'reallysecretkey');
 
@@ -24,6 +24,7 @@ const isAuthenticated: RequestHandler = (req, res, next) => {
             throw err;
         } else {
             req.userId = decodedToken.userId;
+            req.username = decodedToken.name;
             next();
         }
     } catch (error) {
