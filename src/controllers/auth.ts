@@ -68,7 +68,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
                 resp = {
                     status: 'success',
                     message: `Password Matched!`,
-                    data: { token },
+                    data: { token, name: user.name, email: user.email },
                 };
                 res.send(resp);
             } else {
