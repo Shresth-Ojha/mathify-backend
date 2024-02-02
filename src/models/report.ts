@@ -7,6 +7,10 @@ const reportSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: true,
         },
+        quizName: {
+            type: String,
+            required:true
+        },
         userId: {
             type: mongoose.Types.ObjectId,
             required: true,

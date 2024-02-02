@@ -7,7 +7,7 @@ import { ResultResponse } from '../utils/interfaces';
 const getReport: RequestHandler = async (req, res, next) => {
     try {
         let report;
-        if (req.params.reportId) {
+        if (req.params.reportId) { // single report
             const reportId = req.params.reportId;
             report = await Report.findById(reportId);
 
@@ -27,7 +27,7 @@ const getReport: RequestHandler = async (req, res, next) => {
                 err.statusCode = 405;
                 throw err;
             }
-        } else {
+        } else { // all reports
             const userId = req.userId;
             report = await Report.find({ userId });
 

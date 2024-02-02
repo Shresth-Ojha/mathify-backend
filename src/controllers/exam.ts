@@ -34,7 +34,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
         const userId = req.userId;
         const submissions = req.body.submissions;
 
-        const quiz = await Quiz.findById(quizId, { answers: 1 });
+        const quiz = await Quiz.findById(quizId, { name:1, answers: 1 });
         if (!quiz) {
             const err = new ProjectError("Quiz does'nt exist");
             err.statusCode = 404;
@@ -54,7 +54,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
 
             if (submission_list) {
                 for (let j = 0; j < answer_list.length; j++) {
-                    if (submission_list[j] === answer_list[j]) {
+                    if (submission_list[j] == answer_list[j]) {
                         score += 10 / answer_list.length;
                     }
                 }
@@ -63,6 +63,7 @@ const submitExam: RequestHandler = async (req, res, next) => {
 
         const report = new Report({
             quizId,
+            quizName: quiz.name,
             userId,
             submissions,
             score,
