@@ -9,16 +9,16 @@ const getReport: RequestHandler = async (req, res, next) => {
         let report;
         if (req.params.reportId) { // single report
             const reportId = req.params.reportId;
-            report = await Report.findById(reportId);
+            const singleReport = await Report.findById(reportId);
 
-            if (!report) {
+            if (!singleReport) {
                 const err = new ProjectError("Report does'nt exist.");
                 err.statusCode = 404;
                 throw err;
             }
 
             const userId = req.userId;
-            const reportOf = report.userId;
+            const reportOf = singleReport.userId;
 
             if (userId !== reportOf.toString()) {
                 const err = new ProjectError(
@@ -27,6 +27,7 @@ const getReport: RequestHandler = async (req, res, next) => {
                 err.statusCode = 405;
                 throw err;
             }
+            report = [singleReport];
         } else { // all reports
             const userId = req.userId;
             report = await Report.find({ userId });
