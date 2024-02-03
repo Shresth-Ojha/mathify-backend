@@ -7,7 +7,7 @@ import { ResultResponse } from '../utils/interfaces';
 
 const getUser: RequestHandler = async (req, res, next) => {
     let resp: ResultResponse;
-    console.log('woahh! passed the authentication middleware');
+    // console.log('assed the authentication middleware');
 
     try {
         let userId = req.body.userId;
@@ -81,7 +81,7 @@ const logoutUser:RequestHandler = async (req,res,next) => {
 
     try {
         res.clearCookie('jwttoken');
-        console.log('ran')
+        console.log('Logged Out')
         resp = {
             status: 'success',
             message: `User logged out`,
