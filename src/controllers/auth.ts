@@ -65,7 +65,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
 
                 res.cookie('jwttoken', token, {
                     path: '/',
-                    // sameSite: 'none',
+                    sameSite: 'none',
                     httpOnly: true, 
                     secure: true
                 });

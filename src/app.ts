@@ -25,7 +25,7 @@ const corsOptions = {
     origin: true,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
     credentials: true,
-    exposedHeaders: ['Set-Cookie'],
+    exposedHeaders: ['set-cookie'],
 };
 
 app.set('trust proxy', 1);
