@@ -25,15 +25,18 @@ const corsOptions = {
     origin: true,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
     credentials: true,
-    exposedHeaders: ['set-cookie'],
+    // exposedHeaders: ['set-cookie'],
 };
 
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
-// app.use(cors(corsOptions));
-app.use(
-    cors(corsOptions)
-);
+app.use(cors(corsOptions));
+// app.use(
+//     cors(corsOptions)
+// );
+
+
+
 app.use(cookieparser());
 
 // app.use(express.json());
