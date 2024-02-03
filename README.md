@@ -3,6 +3,8 @@
 ## Welcome
 Welcome to the Mathify Backend repo! This app is designed to provide an interactive and engaging platform for students to practice and test their knowledge in maths (later more field). Whether you're a student preparing for exams or a teacher looking for a fun way to assess your students, this app has got you covered.
 
+POSTMAN API for testing: [Mathify-API-Shresth](https://documenter.getpostman.com/view/23647766/2s9YyvBL9T)
+
 ## Features
 * User Registration and Login
   - Most important in today's time -> password encryption!
