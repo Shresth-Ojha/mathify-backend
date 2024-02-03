@@ -16,9 +16,9 @@ const app = express();
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || '';
 
 const corsOptions = {
-    origin: 'http://localhost:5173',
-    methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-    credentials: true
+    origin: ['http://localhost:5173', 'https://mathify-frontend.vercel.app'],
+    methods: 'GET, POST, PUT, DELETE, PATCH, HEAD',
+    credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(cookieparser());
