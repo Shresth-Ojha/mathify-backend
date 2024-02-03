@@ -63,7 +63,10 @@ const loginUser: RequestHandler = async (req, res, next) => {
                     { expiresIn: '1h' }
                 );
 
-                res.cookie('jwttoken', token);
+                res.cookie('jwttoken', token, {
+                    path: '/',
+                    sameSite: 'none',
+                });
 
                 resp = {
                     status: 'success',

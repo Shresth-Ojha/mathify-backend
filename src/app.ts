@@ -15,12 +15,25 @@ const app = express();
 
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || '';
 
+// const corsOptions = {
+//     origin: ['http://localhost:5173', 'https://mathify-frontend.vercel.app'],
+//     methods: 'GET, POST, PUT, DELETE, PATCH, HEAD',
+//     credentials: true,
+// };
+
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://mathify-frontend.vercel.app'],
-    methods: 'GET, POST, PUT, DELETE, PATCH, HEAD',
+    origin: true,
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
     credentials: true,
+    exposedHeaders: ['Set-Cookie'],
 };
-app.use(cors(corsOptions));
+
+app.set('trust proxy', 1);
+
+// app.use(cors(corsOptions));
+app.use(
+    cors(corsOptions)
+);
 app.use(cookieparser());
 
 // app.use(express.json());
