@@ -1,8 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors'
-import cookieparser from 'cookie-parser'
-
+import cors from 'cors';
+import cookieparser from 'cookie-parser';
 
 import userRoute from './routes/user';
 import authRoute from './routes/auth';
@@ -35,8 +34,6 @@ app.use(cors(corsOptions));
 //     cors(corsOptions)
 // );
 
-
-
 app.use(cookieparser());
 
 // app.use(express.json());
@@ -50,14 +47,14 @@ declare global {
     namespace Express {
         interface Request {
             userId: String;
-            username: String
+            username: String;
         }
     }
 }
 
 app.get('/', (req, res) => {
-    res.send("Quizapp backend!");
-})
+    res.send('Mathify backend - by Shresth!');
+});
 
 //redirect /user requests to userRoute
 app.use('/user', userRoute);
@@ -70,32 +67,33 @@ app.use('/exam', examRoute);
 //redirect /report requests to reportRoute
 app.use('/report', reportRoute);
 
+app.use(
+    (err: ProjectError, req: Request, res: Response, next: NextFunction) => {
+        let message: String;
+        let statusCode: number;
 
-app.use((err: ProjectError, req: Request, res: Response, next: NextFunction) => {
-    let message: String;
-    let statusCode: number;
+        if (err.statusCode && err.statusCode < 500) {
+            message = err.message;
+            statusCode = err.statusCode;
+        } else {
+            message = 'Something went wrong, try again after sometime.';
+            statusCode = 500;
+        }
 
-    if (err.statusCode && err.statusCode < 500) {
-        message = err.message;
-        statusCode = err.statusCode;
-    } else {
-        message = "Something went wrong, try again after sometime."
-        statusCode = 500;
+        const resp: ResultResponse = { status: 'error', message, data: {} };
+        if (err.data) {
+            resp.data = err.data;
+        }
+
+        console.log(err.statusCode, ' -> ', err.message);
+        res.status(statusCode).send(resp);
     }
-
-    const resp:ResultResponse = {status:"error", message, data: {}}
-    if(err.data){
-        resp.data = err.data;
-    }
-    
-    console.log(err.statusCode, ' -> ', err.message)
-    res.status(statusCode).send(resp);
-});
+);
 
 mongoose.connect(DB_CONNECTION_STRING);
 
 mongoose.connection.on('connected', () => {
-    console.log("DB connected")
+    console.log('DB connected');
     app.listen(process.env.PORT, () => {
         console.log('Server and DB connected');
     });
