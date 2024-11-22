@@ -1,6 +1,7 @@
 # Mathify - A quizzing app for students!
 Link to the FRONTEND REPO: [Mathify-Frontend-Shresth](https://github.com/Shresth-Ojha/mathify-frontend)
-Deployment: [Mathify-Shresth](https://mathify-frontend.vercel.app/login)
+
+Deployment (can take up to a minute to spin-up): [Mathify-Shresth](https://mathify-frontend.vercel.app/login)
 ## Welcome
 Welcome to the Mathify Backend repo! This app is designed to provide an interactive and engaging platform for students to practice and test their knowledge in maths (later more field). Whether you're a student preparing for exams or a teacher looking for a fun way to assess your students, this app has got you covered.
 
